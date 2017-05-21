@@ -39,9 +39,10 @@ function movies($pdo) {//list movies
         while ($row = $stmt->fetch()) {
             echo '<div>';
             echo '<h1><a href="viewpost.php?id=' . $row['movieID'] . '">' . $row['name'] . '</a></h1>';
-            echo '<p>' . $row['year'] . '</p>';
-            echo '<p>' . $row['certificate'] . '</p>';
-            echo '<p>' . $row['runTime'] . '</p>';
+            echo '<img src=" '. $row['image'] . ' " width="400"/>';
+            echo '<p>Release Year: ' . $row['year'] . '</p>';
+            echo '<p>Certificate: ' . $row['certificate'] . '</p>';
+            echo '<p>Run Time: ' . $row['runTime'] . '</p>';
             echo '</div>';
         }
     } catch (PDOException $e) {
