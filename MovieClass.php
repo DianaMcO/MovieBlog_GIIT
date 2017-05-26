@@ -1,32 +1,52 @@
 <?php
 
-Include 'config.php';
-require_once 'DataObject.php';
 
-Class Movie extends DataObject {
+/*$stmt = $pdo->query("SELECT * FROM movies");       //WHERE movieName = :movieName");
 
-    public function getMovies() {   //grabs the data from the movies table
-        $pdo = DataObject::connect();           //Connect to the database via the DataObject class - catches errors
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare("SELECT * FROM movies");       //WHERE movieName = :movieName");
+foreach ($rows as $row) {
+print_r($row);
+}
 
-        try {
-            $stmt->execute(); //['movieName' => $movieName]);                                                   //3. execute
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            $error = $e->errorInfo();   //4. check error
-            die();
-        }
-        $movies_row = $stmt->fetch(PDO::FETCH_ASSOC);    //5. use data
-        $this->movie[] = $movies_row;
-        return $this->movie;
+unset($stmt);*/
+
+Class Movie {
+
+public $id;
+public $name;
+public $year;
+public $certificate;
+public $runTime;
+
+public function __construct($inId = null, $inName = null, $inYear = null, $inCertificate = null, $inRunTime = null){
+$this->id = $inId;
+$this->name = $inName;
+$this->year = $inYear;
+$this->certificate = $inCertificate;
+$this->runTime = $inRunTime;
+}
 
 
-        //echo "found" . $movie['movieName'];
-        //echo $movie['movieName'];
-    }
+//foreach ($rows as $row){
+//print_r($row);
+}
 
-    public function insertMovies() {
+/*unset ($stmt);
+
+
+
+$movies_row = $stmt->fetch();    //5. use data
+$numrows = count ($movies_row);
+
+foreach ($movies_row as $row){
+print_r ($row);
+}
+
+//echo "found" . $movie['movieName'];
+//echo $movie['movieName'];
+
+/public function insertMovies() {
 
         $pdo = DataObject::connect();
 
@@ -44,10 +64,11 @@ Class Movie extends DataObject {
             die();
         }
     }
+*/
 
-}
+//$newMovie = new Movie();
 
-$newMovie = new Movie();
-print_r($newMovie->getMovies());
-$newMovie->insertMovies();
+//$newMovie->getMovies();
+
+//$newMovie->insertMovies();
 
