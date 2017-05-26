@@ -117,6 +117,23 @@ function viewpost($pdo) {
     }
 }
 
+
+function viewcategory ($pdo) {
+
+    try {
+        $stmt = $pdo->query('SELECT * FROM category');
+        $stmt->execute([':catID' => $GET['catID']]);
+        while ($row = $stmt->fetch()) {
+            echo '<div>';
+            echo '<p>' . $row['name'] . '</h1>';
+            echo '</div>';
+    } 
+        } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    
+}
+
 //Comments FUNCTIONS
 
 function addcomments($pdo, $comment, $member) {//adds a post

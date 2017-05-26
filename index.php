@@ -4,15 +4,7 @@ include 'lib/Movie/View/movie_view.php';
 
 use function Movie\View\display;
         ?>
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Movie Reviews</title>
-    </head>
-    <body>
-        
         <?php echo display('header'); ?>
 
  <!-- Commented this out for the time being - may need to use the other links
@@ -38,20 +30,13 @@ use function Movie\View\display;
         } ?>
  -->
  
- <div class="banner-container">
-     
-     <figure>
-     <img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/>
-     <figcaption>BANNER IMAGE PLACEHOLDER</figcaption>
-     </figure>
-     
+ <div class="container container-featured">
+     <img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/> 
  </div>
  
- <div class="container">
-     
+ <div class="container container-body">
         <?php \Movie\Db\movies($pdo); ?>
-        <?php \Movie\Db\recent_blogs($pdo);?>
-        
+        <?php \Movie\Db\recent_blogs($pdo);?> 
  </div>
  
  <?php echo display('footer'); ?>
