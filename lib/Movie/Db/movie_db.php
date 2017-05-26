@@ -45,8 +45,10 @@ function movies($pdo) {//list movies
         while ($row = $stmt->fetch()) {
             echo '<div>';
             echo '<h1><a href="viewpost.php?id=' . $row['movieID'] . '">' . $row['name'] . '</a></h1>';
-            echo '<p> Cert' . $row['certificate'] . '      ' . $row['runTime'] . '    ' . $row['year'] . '</p>';
-            echo '<img src=" ' . $row['image'] . ' " width="400"/>';
+            echo '<img src=" '. $row['image'] . ' " width="400"/>';
+            echo '<p>Release Year: ' . $row['year'] . '</p>';
+            echo '<p>Certificate: ' . $row['certificate'] . '</p>';
+            echo '<p>Run Time: ' . $row['runTime'] . '</p>';
             echo '</div>';
         }
     } catch (PDOException $e) {
@@ -125,6 +127,23 @@ function viewpost($pdo) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
+}
+
+
+function viewcategory ($pdo) {
+
+    try {
+        $stmt = $pdo->query('SELECT * FROM category');
+        $stmt->execute([':catID' => $GET['catID']]);
+        while ($row = $stmt->fetch()) {
+            echo '<div>';
+            echo '<p>' . $row['name'] . '</h1>';
+            echo '</div>';
+    } 
+        } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    
 }
 
 //Comments FUNCTIONS

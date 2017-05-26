@@ -6,9 +6,8 @@ include 'lib/Movie/View/movie_view.php';
 use function Movie\View\display;
 use function Movie\Db\viewpost;
 
+
 echo display('header');
-
-
 
 
 viewpost($pdo);
