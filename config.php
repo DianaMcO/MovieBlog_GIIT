@@ -2,7 +2,7 @@
 
 /*
   A configuration file that lists all the constants used to configure the application
-  
+
  */
 
 const DB_DSN = 'mysql:host=localhost;dbname=blog'; //Database name

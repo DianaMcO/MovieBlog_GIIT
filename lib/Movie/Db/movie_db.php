@@ -38,17 +38,50 @@ function read_user($pdo, $username) {//selects a user
 
 //MOVIE FUNCTIONS
 
-function movies($pdo) {//list movies
+function addMovie($pdo, $name, $year, $certificate, $runTime, $image) {//adds a post
     try {
         //insert into database
+        $stmt = $pdo->prepare('INSERT INTO movies (name,year,certificate,runTime, image) VALUES (:name ,:year, :certificate, :runTime, :image)');
+        $stmt->execute([':name' => $name, ':year' => $year, ':certificate' => $certificate, ':runTime' => $runTime, ':image' => $image]);
+        //redirect to index page
+        header('Location: index.php');
+        exit;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function getMovies($pdo) {   //Lists all the movies in the database
+    $movieArray = [];
+
+
+    try {
         $stmt = $pdo->query("SELECT * FROM movies");
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        $error = $e->errorInfo();   //          check error
+        die();
+    }
+    $stmt->execute();
+
+
+    while ($rows = $stmt->fetch()) {
+        $myMovie = new \Movie($rows['movieID'], $rows['name'], $rows['year'], $rows['certificate'], $rows['runTime'], $rows['image']);
+        array_push($movieArray, $myMovie);
+    }
+    return $movieArray;
+}
+
+function viewcategory($pdo) {
+
+    try {
+        $stmt = $pdo->query('SELECT * FROM category');
+        $stmt->execute([':catID' => $_GET['catID']]);
+
         while ($row = $stmt->fetch()) {
+
             echo '<div>';
-            echo '<h1><a href="viewpost.php?id=' . $row['movieID'] . '">' . $row['name'] . '</a></h1>';
-            echo '<img src=" '. $row['image'] . ' " width="400"/>';
-            echo '<p>Release Year: ' . $row['year'] . '</p>';
-            echo '<p>Certificate: ' . $row['certificate'] . '</p>';
-            echo '<p>Run Time: ' . $row['runTime'] . '</p>';
+            echo '<p>' . $row['name'] . '</h1>';
             echo '</div>';
         }
     } catch (PDOException $e) {
@@ -58,11 +91,11 @@ function movies($pdo) {//list movies
 
 //BLOG FUNCTIONS
 
-function blogs($pdo, $title, $desc, $content) {//adds a post
+function blogs($pdo, $title, $desc, $content, $movieID, $ratingID) {//adds a post
     try {
         //insert into database
-        $stmt = $pdo->prepare('INSERT INTO blog_posts (title,description,content,date) VALUES (:title, :description, :content, :date)');
-        $stmt->execute([':title' => $title, ':description' => $desc, ':content' => $content, ':date' => date('Y-m-d H:i:s')]);
+        $stmt = $pdo->prepare('INSERT INTO blog_posts (title,description,content,date,movieID,ratingID) VALUES (:title, :description, :content, :date, :movieID, :ratingID)');
+        $stmt->execute([':title' => $title, ':description' => $desc, ':content' => $content, ':date' => date('Y-m-d H:i:s'), ':movieID' => $movieID, ':ratingID' => $ratingID]);
         //redirect to index page
         header('Location: index.php');
         exit;
@@ -127,23 +160,6 @@ function viewpost($pdo) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-}
-
-
-function viewcategory ($pdo) {
-
-    try {
-        $stmt = $pdo->query('SELECT * FROM category');
-        $stmt->execute([':catID' => $GET['catID']]);
-        while ($row = $stmt->fetch()) {
-            echo '<div>';
-            echo '<p>' . $row['name'] . '</h1>';
-            echo '</div>';
-    } 
-        } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-    
 }
 
 //Comments FUNCTIONS
