@@ -1,5 +1,7 @@
 <?php
-include 'common.php';
+include 'common.php'; //connecting to the database
+include 'lib/Movie/Db/MovieClass.php';
+
 include 'lib/Movie/View/movie_view.php';
 
 use function Movie\View\display;
@@ -48,6 +50,15 @@ use function Movie\View\display;
  <div class="container-body">
      
        <?php
+
+echo display('header');
+?>
+<div class="container container-featured">
+    <img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/> 
+</div>
+
+<div class="container container-body">
+    <?php
     \Movie\Db\getMovies($pdo);
 
     $movies = \Movie\Db\getMovies($pdo);
@@ -64,6 +75,4 @@ use function Movie\View\display;
  </div>
  
  <?php echo display('footer'); ?>
-    </body>
-
-</html>
+    

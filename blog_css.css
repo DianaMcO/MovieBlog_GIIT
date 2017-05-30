@@ -3,26 +3,30 @@ html {
 }
 
 body {
-  font-family: 'Helvetiva', sans-serif;
-  font-weight: 300;
-  margin: 0;
-  position: relative;
-  min-height: 100%;
+    font-family: 'Helvetiva', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    position: relative;
+    min-height: 100%;
 }
 
 h1 {
+<<<<<<< HEAD
   font-family: 'Helvetiva', sans-serif;
   padding-top: 0;
   padding-bottom: 10px;
   font-size: 20px;
+=======
+    font-family: 'Helvetiva', sans-serif;
+>>>>>>> 7fd6ddbf60a032000cf13c308e8425c8557d6958
 }
 
 .blog-name {
-  font-family: 'Montserrat Subrayada', sans-serif;
-  font-size: 24px;
-  color: black;
-  float: left;
-  padding-left: 0;
+    font-family: 'Montserrat Subrayada', sans-serif;
+    font-size: 24px;
+    color: black;
+    float: left;
+    padding-left: 0;
 }
 
 .container{
@@ -52,23 +56,23 @@ body a {
     color:#333;
 }
 
- body a:hover {
-     color: #aaa;  
- }
- 
- .navbar-header {
-     height: 80px;
- }
- 
+body a:hover {
+    color: #aaa;  
+}
+
+.navbar-header {
+    height: 80px;
+}
+
 .navbar-brand:focus, .navbar-brand:hover {
     text-decoration: none;
     color: black;
     cursor: default;
 }
 
- .navbar ul {
-     padding-left: 0;
- } 
+.navbar ul {
+    padding-left: 0;
+} 
 
 /*.nav-links a{
     color:#333;
@@ -89,6 +93,7 @@ img {
     padding-bottom: 10px;
 }
 
+<<<<<<< HEAD
 .recentblog-title {
     margin-top: 0;
 }
@@ -98,6 +103,8 @@ img {
 }
 
 
+=======
+>>>>>>> 7fd6ddbf60a032000cf13c308e8425c8557d6958
 .footer-container {
     position: absolute;
     bottom: 0;
@@ -111,7 +118,7 @@ img {
 }
 
 .footer-right {
-   float: right!important;
+    float: right!important;
 }
 
 .footer {
@@ -125,24 +132,24 @@ img {
 }
 
 .footer ul {
-  list-style-type: none;
-  padding: 20px;
-  text-align: right;
-  color: #333;
-    
+    list-style-type: none;
+    padding: 20px;
+    text-align: right;
+    color: #333;
+
 }
 .footer li {
-  color: #333;
-  position: relative;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  display: inline-block;
+    color: #333;
+    position: relative;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    display: inline-block;
 }
 
 .footer li a {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  padding-left:5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding-left:5px;
 }
 
 .fa {

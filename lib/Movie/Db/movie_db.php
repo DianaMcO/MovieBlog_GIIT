@@ -30,18 +30,18 @@ if (empty($user['username'])) {
     }
 }
 
-function delete_user($pdo, $username) {//deletes a user
-    print_r($username);
-    $stmt = $pdo->prepare("DELETE FROM blog_members WHERE username = :username");
-    $stmt->execute([':username' => $username]);
-    header('Location: index.php');
-}
+    function delete_user($pdo, $username) {//deletes a user
+        print_r($username);
+        $stmt = $pdo->prepare("DELETE FROM blog_members WHERE username = :username");
+        $stmt->execute([':username' => $username]);
+        header('Location: index.php');
+    }
 
-function read_user($pdo, $username) {//selects a user
-    $stmt = $pdo->prepare("SELECT * FROM blog_members WHERE username = :username");
-    $stmt->execute(['username' => $username]);
-    return $stmt->fetch();
-}
+    function read_user($pdo, $username) {//selects a user
+        $stmt = $pdo->prepare("SELECT * FROM blog_members WHERE username = :username");
+        $stmt->execute(['username' => $username]);
+        return $stmt->fetch();
+    }
 
 //MOVIE FUNCTIONS
 
@@ -57,8 +57,8 @@ function read_user($pdo, $username) {//selects a user
             echo $e->getMessage();
         }
     }
-    
-      function getMovies($pdo) {   //Lists all the movies in the database
+
+    function getMovies($pdo) {   //Lists all the movies in the database
         $movieArray = [];
 
 
@@ -78,28 +78,10 @@ function read_user($pdo, $username) {//selects a user
         }
         return $movieArray;
     }
-    
-function movies($pdo) {//list movies
-    try {
-        //insert into database
-        $stmt = $pdo->query("SELECT * FROM movies");
-        while ($row = $stmt->fetch()) {
-            echo '<div>';
-            echo '<h1><a href="viewpost.php?id=' . $row['movieID'] . '">' . $row['name'] . '</a></h1>';
-            echo '<img src=" '. $row['image'] . ' " width="400"/>';
-            echo '<p>Release Year: ' . $row['year'] . '</p>';
-            echo '<p>Certificate: ' . $row['certificate'] . '</p>';
-            echo '<p>Run Time: ' . $row['runTime'] . '</p>';
-            echo '</div>';
-        }
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
 
 //BLOG FUNCTIONS
 
-  function blogs($pdo, $title, $desc, $content, $movieID, $ratingID) {//adds a post
+    function blogs($pdo, $title, $desc, $content, $movieID, $ratingID) {//adds a post
         try {
             //insert into database
             $stmt = $pdo->prepare('INSERT INTO blog_posts (title,description,content,date,movieID,ratingID) VALUES (:title, :description, :content, :date, :movieID, :ratingID)');
@@ -112,7 +94,7 @@ function movies($pdo) {//list movies
         }
     }
 
-  function search($pdo, $name) {//search for movie & connected blog with the name typed in search
+    function search($pdo, $name) {//search for movie & connected blog with the name typed in search
         try {
             $stmt = $pdo->query("SELECT * FROM blog_posts b, movies m WHERE b.movieID = m.movieID and m.name LIKE '%$name%'"); //lists posts from search
             while ($row = $stmt->fetch()) {
@@ -133,32 +115,31 @@ function movies($pdo) {//list movies
         }
     }
 
-function recent_blogs($pdo) {
-    try {
-        $stmt = $pdo->query // changed the select statement so it displays image and video for each post
-        ('SELECT postID, title, description, content, date, ratingID, blog_posts.movieID, movies.image, movies.movieID FROM blog_posts, movies WHERE movies.movieID = blog_posts.movieID ORDER BY postID DESC'); //lists posts from 
-        while ($row = $stmt->fetch()) {
-            echo '<div class="container container-recent">';
-            echo '<img class="recentblog-image" src=" '. $row['image'] . ' " width="400"/>';
-            echo '<h1 class="recentblog-title"><a href="viewpost.php?id=' . $row['postID'] . '">' . $row['title'] . '</a></h1>';
-            echo '<p>Posted on ' . date('jS M Y H:i:s', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';
-            echo '</div>';  
+    function recent_blogs($pdo) {
+        try {
+            $stmt = $pdo->query('SELECT postID, title, description, content, date, ratingID, blog_posts.movieID, movies.image, movies.movieID FROM blog_posts, movies WHERE movies.movieID = blog_posts.movieID ORDER BY postID DESC'); //lists posts from 
+            while ($row = $stmt->fetch()) {
+                echo '<div class="container container-recent">';
+                echo '<img class="recentblog-image" src=" '. $row['image'] . ' " width="400"/>';
+                echo '<h1 class="recentblog-title"><a href="viewpost.php?id=' . $row['postID'] . '">' . $row['title'] . '</a></h1>';
+                echo '<p>Posted on ' . date('jS M Y H:i:s', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
+                echo '<p>' . $row['description'] . '</p>';
+                echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';
+                echo '</div>';  
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo $e->getMessage();
     }
-}
 
-function viewpost($pdo) {
+ function viewpost($pdo) {
     try {
         $stmt = $pdo->prepare // changed the select statement so it displays image and video for each post
         ('SELECT postID, title, description, content, date, ratingID, blog_posts.movieID, movies.movieID, movies.image, movies.video FROM blog_posts, movies WHERE postID = :postID AND blog_posts.movieID = movies.movieID');
         $stmt->execute([':postID' => $_GET['id']]);
-        $row = $stmt->fetch();      
+        $row = $stmt->fetch();
         $video = '<span class="video-wrapper"><iframe width="560" height="315" src="' . $row['video'] . '" frameborder="0" allowfullscreen></iframe></span>';
-        
+
         echo '<h1>' . $row['title'] . '</h1>';
         echo '<p>Posted on ' . date('jS M Y', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
         echo '<img src=" '. $row['image'] . ' " width="400"/>';
@@ -170,22 +151,26 @@ function viewpost($pdo) {
         echo $e->getMessage();
     }
 }
+    
+    // CATEGORY FUNCTIONS
+    
+        function viewcategory($pdo) {
 
+        try {
+            $stmt = $pdo->query('SELECT * FROM category');
+            $stmt->execute([':catID' => $_GET['catID']]);
 
-function viewcategory ($pdo) {
+            while ($row = $stmt->fetch()) {
 
-    try {
-        $stmt = $pdo->query('SELECT * FROM category');
-        while ($row = $stmt->fetch()) {
-            echo '<div>';
-            echo '<p><a href="' . $row['name'] . '.php">' . $row['name']. '</a></h1>';
-            echo '</div>';
-    } 
+                echo '<div>';
+                echo '<p>' . $row['name'] . '</h1>';
+                echo '</div>';
+            }
         } catch (PDOException $e) {
-        echo $e->getMessage();
+            echo $e->getMessage();
+        }
     }
-}
-
+    
 function viewcategory_posts ($pdo) {
     try { 
         $stmt = $pdo->query
@@ -198,15 +183,14 @@ function viewcategory_posts ($pdo) {
             echo '<img src=" '. $row['image'] . ' " width="400"/>';
             echo '<p>Posted on ' . date('jS M Y H:i:s', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
             echo '<p>' . $row['description'] . '</p>';
-            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';
-           
+            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';         
     }
         }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }    
     }
-    
+
 //Comments FUNCTIONS
 
     function addcomments($pdo, $comment, $member, $postID) {//adds a post
@@ -239,3 +223,4 @@ function viewcategory_posts ($pdo) {
             echo $e->getMessage();
         }
     }
+    

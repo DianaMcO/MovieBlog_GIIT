@@ -18,7 +18,10 @@ echo display('header');
 <div class="container container-body">
                 <h2>Comments</h2>
 
-        <?php \Movie\Db\comments($pdo, $postID); ?>
+<?php viewpost($pdo);
+$postID = ($_SESSION['postID']);
+\Movie\Db\comments($pdo, $postID); ?>
+
 </div>
 
 <?php

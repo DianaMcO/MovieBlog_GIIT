@@ -17,6 +17,6 @@ try {
     die($e->getMessage());
 }
 set_error_handler(function ($errorType, $errorMessage) {
-   // echo "there's a problem";
-   echo \Movie\View\display('error', ['message' => $errorMessage]);
+    // echo "there's a problem";
+    echo \Movie\View\display('error', ['message' => $errorMessage]);
 });

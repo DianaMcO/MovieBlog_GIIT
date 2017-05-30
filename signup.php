@@ -3,8 +3,11 @@ include 'common.php';
 include 'lib/Movie/View/movie_view.php';
 include 'lib/Movie/Validation/movie_validation.php';
 
+use function Movie\View\display;
 use function Movie\Validation\test_input,
              Movie\Validation\valid;
+
+echo display('header');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //validation checks
@@ -33,20 +36,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "username and password cannot be the same";
         die();
     }
-
-    Movie\Db\signup($pdo, $name, $password, $email);
+    $role = ($_POST['roleID']);
+    //print_r($role);
+   Movie\Db\signup($pdo, $name, $password, $email, $role);
 }
 ?>
+
 
 
 <!doctype html>
 <html>
     <head><title>Movie times</title></head>
     <body>
-
-        <h1>Signup</h1>
-
-<?php echo Movie\View\display('adduserform'); ?>
-
+        <?php echo Movie\View\display('adduserform'); ?>
+        <?php echo display('footer'); ?>
     </body>
 </html>

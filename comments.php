@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     Movie\Db\addcomments($pdo, $comment, $member, $postID);
-    
 }
 ?>
 
