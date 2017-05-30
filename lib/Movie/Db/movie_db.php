@@ -155,16 +155,12 @@ if (empty($user['username'])) {
     // CATEGORY FUNCTIONS
     
         function viewcategory($pdo) {
-
-        try {
-            $stmt = $pdo->query('SELECT * FROM category');
-            $stmt->execute([':catID' => $_GET['catID']]);
-
-            while ($row = $stmt->fetch()) {
-
-                echo '<div>';
-                echo '<p>' . $row['name'] . '</h1>';
-                echo '</div>';
+    try {
+        $stmt = $pdo->query('SELECT * FROM category');
+        while ($row = $stmt->fetch()) {
+            echo '<div>';
+            echo '<p><a href="' . $row['name'] . '.php">' . $row['name']. '</a></h1>';
+            echo '</div>';
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
