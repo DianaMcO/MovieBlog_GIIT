@@ -7,14 +7,21 @@ use function Movie\View\display;
 use function Movie\Db\viewpost;
 
 
-echo display('header');
+echo display('header'); 
+?>
 
+<div class="container">
+        <?php viewpost($pdo);
+        $postID = ($_SESSION['postID']); ?>
+</div>
 
-viewpost($pdo);
-$postID = ($_SESSION['postID']);
+<div class="container container-body">
+                <h2>Comments</h2>
 
-\Movie\Db\comments($pdo, $postID);
+        <?php \Movie\Db\comments($pdo, $postID); ?>
+</div>
 
+<?php
 
 if (!empty($_SESSION['login_user'])) {
     echo "<br><button type='button'><a href = 'comments.php?comment'>Comments</a></button>";

@@ -11,7 +11,7 @@
                 </a>
                 <div class="finlay-carousel-caption">
                     <h3><?php echo $row['More Info']?></h3>
-                    <p>Click the link above for more details about <?php echo $row['More Info']>; ?></p>
+                    <p>Click the link above for more details about <?php echo $row['More Info']; ?></p>
                 </div>
             </div>
 <?php
