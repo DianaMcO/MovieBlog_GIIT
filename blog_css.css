@@ -11,14 +11,10 @@ body {
 }
 
 h1 {
-<<<<<<< HEAD
   font-family: 'Helvetiva', sans-serif;
   padding-top: 0;
   padding-bottom: 10px;
   font-size: 20px;
-=======
-    font-family: 'Helvetiva', sans-serif;
->>>>>>> 7fd6ddbf60a032000cf13c308e8425c8557d6958
 }
 
 .blog-name {
@@ -93,7 +89,7 @@ img {
     padding-bottom: 10px;
 }
 
-<<<<<<< HEAD
+
 .recentblog-title {
     margin-top: 0;
 }
@@ -103,8 +99,6 @@ img {
 }
 
 
-=======
->>>>>>> 7fd6ddbf60a032000cf13c308e8425c8557d6958
 .footer-container {
     position: absolute;
     bottom: 0;

@@ -47,16 +47,6 @@ use function Movie\View\display;
     </div>
  </div>
 
- <div class="container-body">
-     
-       <?php
-
-echo display('header');
-?>
-<div class="container container-featured">
-    <img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/> 
-</div>
-
 <div class="container container-body">
     <?php
     \Movie\Db\getMovies($pdo);
