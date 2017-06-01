@@ -33,6 +33,7 @@
                         echo "<li class='nav-links'><a href='about_page.html'>About</a></li>";
                         echo "<li class='nav-links'><a href='search.php?search'>Search</a></li>";
                         echo "<li class='nav-links'><a href='comp.php?competition'>Competition</a></li>";
+                        echo "<li class='nav-links'><a href='viewcategory.php'>Categories</a></li>";
                         echo "<li style='color:red'; class='nav-links'>" . $_SESSION['login_user'] . " is logged in</style></a></li>";
                         echo "</ul>";
                         echo "<ul class='nav navbar-nav navbar-right'>";
@@ -42,6 +43,7 @@
                     } elseif (empty($_SESSION['login_user'])) {
                         echo "<li class='nav-links'><a href='index.php'>Home</a></li>";
                         echo "<li class='nav-links'><a href='about_page.html'>About</a></li>";
+                        echo "<li class='nav-links'><a href='viewcategory.php'>Categories</a></li>";
                         echo "<li class='nav-links'><a href='search.php?search'>Search</a></li>";
                        // echo "<li class='nav-links'><a href='signup.php'>Sign up</a></li>";
                         echo "</ul>";

@@ -154,38 +154,67 @@ if (empty($user['username'])) {
     
     // CATEGORY FUNCTIONS
     
-        function viewcategory($pdo) {
+function viewcategory($pdo) {
     try {
         $stmt = $pdo->query('SELECT * FROM category');
         while ($row = $stmt->fetch()) {
             echo '<div>';
-            echo '<p><a href="' . $row['name'] . '.php">' . $row['name']. '</a></h1>';
+            echo '<p><a href="viewcategory.php?id=' . $row['catID'] . '">' . $row['name']. '</a></p>';
             echo '</div>';
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    
+/*    
 function viewcategory_posts ($pdo) {
     try { 
         $stmt = $pdo->query
-        ('SELECT postID, title, description, date, ratingID, blog_posts.movieID, movies.movieID, movies.image, movie_categories.catID, movie_categories.movieID, category.catID
-          FROM blog_posts, movies, movie_categories, category
-          WHERE movie_categories.catID = category.catID');
-        foreach ($stmt as $row) {
-            if($row['movie_categories.catID'] == $row['category.catID']) {
+        ('SELECT * FROM 
+         category, movie_categories, blog_posts, movies
+         WHERE movie_categories.catID = category.catID AND movie_categories.movieID = blog_posts.movieID');
+        
+        while ($row = $stmt->fetch()) {
             echo '<h1><a href="viewpost.php?id=' . $row['postID'] . '">' . $row['title'] . '</a></h1>';
             echo '<img src=" '. $row['image'] . ' " width="400"/>';
             echo '<p>Posted on ' . date('jS M Y H:i:s', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
             echo '<p>' . $row['description'] . '</p>';
-            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';         
-    }
+            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';           
+            $_SESSION['name'] = $row['name'];
+        }          
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }    
+}
+ */
+            /*SELECT movies.movieID, movies.name, movies.image, movies.certificate, movies.year, blog_posts.postID, blog_posts.movieID, blog_posts.title, blog_posts.description, blog_posts.date, blog_posts.ratingID, movie_categories.movieID, movie_categories.catID, category.catID FROM blog_posts JOIN movies on movies.movieID = blog_posts.movieID
+            JOIN movie_categories on movie_categories.movieID = movies.movieID 
+            JOIN category on category.catID = movie_categories.catID
+            WHERE movie_categories.catID = category.catID
+            */
+    
+ function viewcategory_posts ($pdo) {
+    try { 
+        $stmt = $pdo->query
+        ('SELECT * FROM blog_posts JOIN (movie_categories join category USING (catID)) USING (movieID)');
+        $row = $stmt->fetch();
+        if ($_GET['id'] == $row['catID']) {
+            echo '<h1><a href="viewpost.php?id=' . $row['postID'] . '">' . $row['title'] . '</a></h1>';
+            echo '<img class="recentblog-image src=" '. $row['image'] . ' " width="400"/>';
+            echo '<p>Posted on ' . date('jS M Y H:i:s', strtotime($row['date'])) . " - Rating " . $row['ratingID'] . '</p>';
+            echo '<p>' . $row['description'] . '</p>';
+            echo '<p><a href="viewpost.php?id=' . $row['postID'] . '">Read More</a></p>';           
+            $_SESSION['catID'] = $row['catID'];         
+        }else {
+            echo "No posts in this category";
         }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }    
-    }
+    }catch (PDOException $e) {
+        echo $e->getMessage();
+    }    
+}
+    
+    
+    
 
 //Comments FUNCTIONS
 
