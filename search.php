@@ -7,21 +7,17 @@ use function Movie\View\display;
 use function Movie\Validation\test_input;
 
 echo display('header');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $query = test_input($_POST['postTitle']);
-
-    Movie\Db\search($pdo, $query);
-}
 ?>
+<div class="container container-body">
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-<!doctype html>
-<html>
-    <head><title>Search</title></head>
-    <body>
-        <?php echo Movie\View\display('search'); ?>
+        $query = test_input($_POST['postTitle']);
 
-    </body>
-</html>
-<?php echo display('footer'); ?>
+        Movie\Db\search($pdo, $query);
+    }
+    echo Movie\View\display('search');
+    echo '</div>';
+    echo display('footer');
+    ?>
+

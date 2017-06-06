@@ -10,29 +10,16 @@ use function Movie\View\display;
 echo display('header');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // readMovie($pdo);
 
     $title = test_input($_POST['title']);
     $desc = test_input($_POST['description']);
     $content = test_input($_POST['content']);
-    $movieID = test_input($_POST['movieID']);
     $ratingID = test_input($_POST['ratingID']);
 
-
-
-    if (!validtext($desc)) {
-        echo "Only letters and numbers allowed"; //need to include spaces
-        die();
-    }
-
-    if (!validtext($content)) {
-        echo "Only letters and numbers allowed"; //need to include spaces
-        die();
-    }
-
-    Movie\Db\blogs($pdo, $title, $desc, $content, $_POST['date'], $movie, $rating);
+    Movie\Db\blogs($pdo, $title, $desc, $content, $ratingID);
 }
 ?>
-
 
 
 <!doctype html>

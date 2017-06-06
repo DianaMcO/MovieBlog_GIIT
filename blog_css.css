@@ -11,10 +11,10 @@ body {
 }
 
 h1 {
-  font-family: 'Helvetiva', sans-serif;
-  padding-top: 0;
-  padding-bottom: 10px;
-  font-size: 20px;
+    font-family: 'Helvetiva', sans-serif;
+    padding-top: 0;
+    padding-bottom: 10px;
+    font-size: 20px;
 }
 
 .blog-name {
@@ -43,9 +43,15 @@ h1 {
     padding-bottom: 100px;
 }
 
+.container-posts {
+    padding-bottom: 0px;
+    padding-left: 15px;
+}
+
 .container-recent {
     padding-top: 20px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    padding-left: 15px;
 }
 
 body a {
@@ -92,6 +98,7 @@ img {
 
 .recentblog-title {
     margin-top: 0;
+    
 }
 .recentblog-image {
     float: left;
@@ -153,4 +160,14 @@ img {
 .video-wrapper {
     display: block;
     text-align: center;
+}
+
+.scroll {
+    overflow-y: scroll;
+    width: 200px;
+    height: 200px;
+}
+
+.subscribe {
+    border: 1px solid #333;
 }

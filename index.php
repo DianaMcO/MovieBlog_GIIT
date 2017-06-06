@@ -5,47 +5,70 @@ include 'lib/Movie/Db/MovieClass.php';
 include 'lib/Movie/View/movie_view.php';
 
 use function Movie\View\display;
-        ?>
 
-        <?php echo display('header'); ?>
+echo display('header');
+?>
+<!--div class="container container-featured"-->
 
- <!-- Commented this out for the time being - may need to use the other links
- in the nav 
-      <?php echo "<a href = 'login.php?login'>Login</a>";
-        if (isset($_GET['login'])) {
-            login();
-        } ?>
-        
-        <?php echo "<br><a href = 'signup.php?signup'>Signup</a>";
-        if (isset($_GET['signup'])) {
-            signup();
-        } ?>
-        
-        <?php echo "<br><a href = 'search.php?search'>Search</a>";
-        if (isset($_GET['search'])) {
-            search();
-        } ?>
-        
-        <?php echo "<br><a href = 'comp.php?competition'>Competitions</a>";
-        if (isset($_GET['comp'])) {
-            search();
-        } ?>
- -->
- 
- <div class="container container-featured">
-     <img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/> 
- </div>
- 
- <div class="container container-buttons">
- <div class="row">
-    <div class="col-sm-12 col-md-12">
-     <form action="/enrol.php" method="post" enctype="multipart/form-data" >
-        <input type="text" placeholder="Enter your email address" name="Email" />
-        <button type=“submit” id=“submit” onclick=“alert(’Thanks’)”>Submit</button>
-    </form>
-    </div>  
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="images/alien.jpg" alt="Alien">
+        </div>
+
+        <div class="item">
+            <img src="images/fastandfurious.jpg" alt="Fast and Furious">
+        </div>
+
+        <div class="item">
+            <img src="images/fantastic-four.jpg" alt="Fantastic Four">
+        </div>
+
+        <div class="item">
+            <img src="images/spy.jpg" alt="Spy">
+        </div>
     </div>
- </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    <!--img src="https://usercontent2.hubstatic.com/13534699.jpg" alt="Alien 2017"/--> 
+</div>
+
+
+<div class="container container-buttons">
+  <div class="container-posts">
+     <div class="container-recent">
+       <div class="row">
+           <h2>Subscribe</h2>
+           <form action="index.php" method="post" enctype="multipart/form-data" >
+               <div class="col-sm-12" style="padding-left:0;">
+                <p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+              <input class="subscribe" type="text" placeholder="Enter your email address " name="Email" style="width: 30%; padding: 1px 2px"/>   
+              <button type="submit" id="submit" onclick="alert('Thank you for signing up')">Submit</button>
+            </div>
+           </form>
+       </div>
+     </div>  
+  </div>
+    <hr>
+</div>
+
 
 <div class="container container-body">
     <?php
@@ -61,8 +84,9 @@ use function Movie\View\display;
 //        echo '<img src=" ' . $movie->image . ' " width="400"/>';
 //        echo '</div>';
 //    }
-            \Movie\Db\recent_blogs($pdo);?> 
- </div>
- 
- <?php echo display('footer'); ?>
+    \Movie\Db\recent_blogs($pdo);
+    ?> 
+</div>
+
+<?php echo display('footer'); ?>
     
