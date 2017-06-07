@@ -252,12 +252,14 @@ function viewcategory_posts($pdo) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-
+$i = 0;
     while ($row = $stmt->fetch()) {
         echo "<div class='container container-body container-posts'>";
         echo '<div class="container container-recent">';
         echo "<br>";
-        echo "<h1 style='text-transform: uppercase'>" . $row['name'] . '</h1> <hr>';
+        if($i==0){
+            echo "<h1 style='text-transform: uppercase'>" . $row['name'] . '</h1> <hr>';
+        }
         echo '<h1><a href="viewpost.php?id=' . $row['postID'] . '">' . $row['title'] . '</a></h1>';
         echo '<p> Cert ' . $row['certificate'] . '   |   ' . $row['runTime'] . '  |  ' . $row['year'] . '</p>';
         echo '<img src=" ' . $row['image'] . ' " width="200"/>';
@@ -267,7 +269,8 @@ function viewcategory_posts($pdo) {
 
         echo "</div>";
         echo "</div><hr>";
-
+        
+        $i++;
     }
 
 }

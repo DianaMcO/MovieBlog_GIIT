@@ -54,6 +54,10 @@ h1 {
     padding-left: 15px;
 }
 
+.container-recent img {
+    padding-right: 20px;
+}
+
 body a {
     color:#333;
 }
